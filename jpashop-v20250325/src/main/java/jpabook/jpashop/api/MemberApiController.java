@@ -5,6 +5,7 @@ import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,7 +54,8 @@ public class MemberApiController {
     }
 
     @PutMapping("/api/v2/members/{id}")
-    public UpdateMemberResponse upadateMemberV2(@PathVariable Long id, @RequestBody @Valid UpdateMemberRequest request) {
+    public UpdateMemberResponse upadateMemberV2(@PathVariable(value = "id") Long id,
+                                                @RequestBody @Valid UpdateMemberRequest request) {
         memberService.update(id, request.getName());
         Member findMember = memberService.findOne(id);
         return new UpdateMemberResponse(findMember.getId(), findMember.getName());
@@ -65,6 +67,7 @@ public class MemberApiController {
     }
 
     @Data
+    @NoArgsConstructor
     static class CreateMemberResponse {
         private Long id;
 
@@ -81,6 +84,7 @@ public class MemberApiController {
 
     @Data
     @AllArgsConstructor
+    @NoArgsConstructor
     static class UpdateMemberResponse {
         private Long id;
         private String name;
@@ -88,13 +92,15 @@ public class MemberApiController {
 
     @Data
     @AllArgsConstructor
-    static class Result<T> {
+    @NoArgsConstructor
+    public static class Result<T> {
         private T data;
     }
 
     @Data
     @AllArgsConstructor
-    static class MemberDto {
+    @NoArgsConstructor
+    public static class MemberDto {
         private String name;
     }
 }
