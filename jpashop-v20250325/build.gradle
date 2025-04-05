@@ -37,6 +37,7 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5-jakarta'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'

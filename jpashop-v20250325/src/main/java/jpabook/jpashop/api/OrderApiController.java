@@ -7,6 +7,7 @@ import jpabook.jpashop.repository.order.query.OrderQueryRepository;
 import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto;
 import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryRepository;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,6 +71,7 @@ public class OrderApiController {
     }
 
     @Data
+    @NoArgsConstructor
     static class OrderDto {
         private Long orderId;
         private String name;
@@ -92,6 +94,7 @@ public class OrderApiController {
     }
 
     @Data
+    @NoArgsConstructor
     static class OrderItemDto {
         private String itemName;//상품 명
         private int orderPrice; //주문 가격
