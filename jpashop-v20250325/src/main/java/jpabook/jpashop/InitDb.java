@@ -18,6 +18,7 @@ public class InitDb {
     public void init() {
         initService.dbInit1();
         initService.dbInit2();
+        initService.dbInitLogin();
     }
 
     @Component
@@ -57,6 +58,12 @@ public class InitDb {
             OrderItem orderItem2 = OrderItem.createOrderItem(book2, 40000, 4);
             Order order = Order.createOrder(member, delivery, orderItem1, orderItem2);
             em.persist(order);
+        }
+
+        public void dbInitLogin() {
+            Member member = createMember("qwe", "진주", "2", "2222");
+            member.setPassword("qwe");
+            em.persist(member);
         }
 
         private Member createMember(String name, String city, String street, String zipcode) {

@@ -14,6 +14,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.io.IOException;
+
+import static jpabook.jpashop.service.LoginService.LOGIN_MEMBER;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,8 +26,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class LoginController {
 
     private final LoginService loginService;
-    public static final String LOGIN_MEMBER = "loginMember";
-
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
         return "login/loginForm";
@@ -30,6 +33,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute LoginForm form,
+                          @RequestParam(defaultValue = "/") String redirectURL,
                           BindingResult bindingResult,
                           HttpServletRequest request) throws IllegalAccessException {
 
@@ -53,7 +57,7 @@ public class LoginController {
         Member attribute = (Member)session.getAttribute(LOGIN_MEMBER);
         System.out.println("session = " + attribute.getName());
 
-        return "redirect:/";
+        return "redirect:" + redirectURL;
     }
 
     @PostMapping("/logout")

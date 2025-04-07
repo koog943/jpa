@@ -14,6 +14,8 @@ public class LoginService {
     @Autowired
     private final MemberQueryDsl memberQueryDsl;
 
+    public static final String LOGIN_MEMBER = "loginMember";
+
     public Member login(String name, String password) throws IllegalAccessException {
         return memberQueryDsl.findByLoginId(name, password).orElse(null);
     }
