@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.swing.text.html.parser.Entity;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class MemberQueryDsl {
@@ -31,6 +32,16 @@ public class MemberQueryDsl {
         return query.selectFrom(qMember)
                 .where(qMember.name.eq(name))
                 .fetch();
+    }
+
+    public Optional<Member> findByLoginId(String name, String password) {
+        Member member = query.selectFrom(qMember)
+                .where(qMember.name.eq(name))
+                .where(qMember.password.eq(password))
+                .fetchOne();
+
+
+        return Optional.ofNullable(member);
     }
 
 }

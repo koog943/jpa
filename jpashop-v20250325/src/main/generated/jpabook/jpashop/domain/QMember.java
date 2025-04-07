@@ -30,6 +30,8 @@ public class QMember extends EntityPathBase<Member> {
 
     public final ListPath<Order, QOrder> orders = this.<Order, QOrder>createList("orders", Order.class, QOrder.class, PathInits.DIRECT2);
 
+    public final StringPath password = createString("password");
+
     public QMember(String variable) {
         this(Member.class, forVariable(variable), INITS);
     }

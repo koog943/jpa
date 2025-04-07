@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.transform.Result;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,14 +24,14 @@ public class MemberApiController {
     }
 
     @GetMapping("/api/v2/members")
-    public Result membersV2() {
+    public Result<List<MemberDto>> membersV2() {
         List<Member> findMembers = memberService.findMembers();
 
         List<MemberDto> collect = findMembers.stream()
                 .map(m -> new MemberDto(m.getName()))
                 .collect(Collectors.toList());
 
-        return new Result(collect);
+        return new Result<>(collect);
     }
 
     @PostMapping("/api/v1/members")
